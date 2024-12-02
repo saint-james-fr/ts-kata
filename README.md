@@ -97,16 +97,13 @@ type TableName = "robin" | "andreas";
 
 // 4. Define the structure of a coordinate row based on the column specification
 // For "robin", we use LongLatSpec (longitude first), and for "andreas", we use LatLongSpec (latitude first)
-type CoordinateRow<Spec extends LatLongSpec | LongLatSpec> =
-  Spec extends LatLongSpec
-    ? { latitude: number; longitude: number }
-    : { longitude: number; latitude: number };
+type CoordinateRow<Spec extends LatLongSpec | LongLatSpec> = Spec extends LatLongSpec
+  ? { latitude: number; longitude: number }
+  : { longitude: number; latitude: number };
 
 // 5. Define the database structure, with the correct column order based on the table name
 type Database = {
-  [K in TableName]: K extends "robin"
-    ? CoordinateRow<LongLatSpec>[]
-    : CoordinateRow<LatLongSpec>[];
+  [K in TableName]: K extends "robin" ? CoordinateRow<LongLatSpec>[] : CoordinateRow<LatLongSpec>[];
 };
 
 // Example usage
@@ -121,8 +118,8 @@ const myDatabase: Database = {
 };
 
 // Accessing data
-const robinData = myDatabase.robin; // Array of CoordinateRow for the "robin" table
-const andreasData = myDatabase.andreas; // Array of CoordinateRow for the "andreas" table
+const robinData = myDatabase.robin;  // Array of CoordinateRow for the "robin" table
+const andreasData = myDatabase.andreas;  // Array of CoordinateRow for the "andreas" table
 
 console.log(robinData);
 console.log(andreasData);
