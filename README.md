@@ -2,11 +2,16 @@
 
 L'idée est de progresser ensemble, toutes les 2 ou 3 semaines sur des kata typescript.
 
+## 📚 Ressources
+
+- [TypeScript Tutorial Exercises](https://type-challenges.github.io/)
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/handbook/)
+
 ### 🤝 Règles
 
-- on joue tous ensemble mais on répond individuellement
+- on apprend un nouveau concept avec un exercice.
 
-- celui qui a trouvé doit être capable de l'expliquer ou d'aiguiller l'autre en essayant de procéder par étapes
+- on joue tous ensemble mais on répond individuellement. Celui qui a trouvé doit être capable de l'expliquer ou d'aiguiller l'autre en essayant de procéder par étapes
 
 ## 🎯 Séance 1: 19 novembre 2024
 
@@ -30,11 +35,100 @@ Concepts à réviser :
 
 - Readonly: [TypeScript Tutorial Exercises](https://type-challenges.github.io/?question=00007-easy-readonly)
 
-## 🎯 Séance 2: 10 décembre 2024
+## 🎯 Séance 2: 3 décembre 2024
 
-???
+### Révision 1 : le jeu ça
 
-## 📚 Ressources
+T est ça.
 
-- [TypeScript Tutorial Exercises](https://type-challenges.github.io/)
-- [TypeScript Documentation](https://www.typescriptlang.org/docs/handbook/)
+- keyof: je veux avoir accès à toutes les clés de d'un objet comme une union, c'est cette clé de ça ou cette clé de ça ou cette clé de ça...
+  idée: on déplie -> on collectionne
+- mapped type: je veux pouvoir dire que pour chacuns des élements de ça. Pour cet élément de ça, puis pour cet élément de ça....
+  idée: itération -> on parcourt
+- conditional type: est-ce que ça est inclus dans ça ? Oui, alors quelquechose est forcément vrai et voici cette chose, et si non voici ce qui va se passer ou pas
+  idée: question -> on fait bifurquer
+
+#### Révision 2 Tuple TupleToObject
+
+[tuple-to-object exercice](https://type-challenges.github.io/?question=00011-easy-tuple-to-object)
+
+```typescript
+// What is a tuple ?
+// An array of readonly values
+type Tuple<T> = readonly T[];
+
+// An example ?
+// An array of const values, like.. an enum?
+// A row of a database and the the column's name
+
+// A tuple of strings
+type StringTuple = readonly string[];
+
+// ColumnName
+type ColumnName<P> = readonly (keyof P)[];
+
+// a tuple of composite types
+type CompositeTuple = readonly [boolean, string];
+
+// How to define the property of an object ?
+
+// A string -> {"c'est vrai ?": true}
+// a symbol : a unique primitive data type
+/*
+
+But under the hood, all object keys are ultimately converted to strings, even if the
+key is a number. This is because JavaScript objects treat
+keys as strings (except for Symbol-based keys).
+
+Even if you use a non-string value (like a number or symbol)
+ as an object key, JavaScript will implicitly convert it to a string.
+
+Symbols ?
+
+Symbols are a primitive data type introduced in ES6 that are unique
+and immutable. They can be used as keys in objects without
+risk of collision with other keys.
+
+const sym = Symbol('description');
+const obj = { [sym]: 'value with symbol key' };
+
+OK now how do you represent any property : with PropertyKey
+
+In TypeScript, property keys (i.e., the keys of an object) can be either:
+
+Strings
+Numbers
+Symbols (though less common)
+
+Ok how how you represent any object then?
+
+*/
+
+type MyObject = {
+  PropertyKey: unknown;
+};
+
+/*
+
+Why Not Use PropertyKey for Object Definitions?
+In most cases, when you're defining an object, you'll use a string as the key because:
+
+String is the default for most object keys: When you define an object with keys like obj = { name: "Alice" }, the key is implicitly a string.
+Objects don't naturally accept numeric keys in a way that's significantly different from strings, except for things like arrays, which have numeric indices. Symbol keys are rarely used in everyday code: While symbols are powerful for creating unique keys (useful for things like "private" properties or metadata), they're not commonly used for typical object keys.
+
+type AnyObject = {
+[key: string]: unknwown
+}
+
+Let's do it!
+
+*/
+
+type TupleToObject<T extends readonly PropertyKey[]> = { [P in T[number]]: P };
+```
+
+###
+
+### infer
+
+Exerice Awaited
