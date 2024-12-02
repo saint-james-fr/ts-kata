@@ -48,14 +48,21 @@ T est ça.
 - conditional type: est-ce que ça est inclus dans ça ? Oui, alors quelquechose est forcément vrai et voici cette chose, et si non voici ce qui va se passer ou pas
   idée: question -> on fait bifurquer
 
+  More examples here
+
 #### Révision 2 Tuple TupleToObject
 
 [tuple-to-object exercice](https://type-challenges.github.io/?question=00011-easy-tuple-to-object)
 
 ```typescript
 // What is a tuple ?
-// An array of readonly values
-type Tuple<T> = readonly T[];
+
+// An array of
+type Tuple<T> = T[];
+
+// a readonlly tuple
+
+type ReadonlyTuple<T> = readonly T[];
 
 // An example ?
 // An array of const values, like.. an enum?
@@ -64,11 +71,61 @@ type Tuple<T> = readonly T[];
 // A tuple of strings
 type StringTuple = readonly string[];
 
-// ColumnName
-type ColumnName<P> = readonly (keyof P)[];
-
 // a tuple of composite types
 type CompositeTuple = readonly [boolean, string];
+
+// Keys as a tuple: Latitude and longitude
+type TableName = "robin" | "andreas";
+type CoordinatesTuples = readonly number[];
+type TableRow = CoordinatesTuples[];
+type Database = Record<TableName, { [key in ColumnName]: TableRow[] }[]>;
+
+myDatabase = {
+  robin: [0.323214, 0.232132],
+  andreas: [232132, 323214],
+};
+
+// 1. Define the coordinate column order types (tuples)
+type LatLongSpec = readonly ["latitude", "longitude"];
+type LongLatSpec = readonly ["longitude", "latitude"];
+
+// 2. Define valid column names (latitude and longitude)
+type ValidColumns = "latitude" | "longitude";
+
+// 3. Define table names
+type TableName = "robin" | "andreas";
+
+// 4. Define the structure of a coordinate row based on the column specification
+// For "robin", we use LongLatSpec (longitude first), and for "andreas", we use LatLongSpec (latitude first)
+type CoordinateRow<Spec extends LatLongSpec | LongLatSpec> =
+  Spec extends LatLongSpec
+    ? { latitude: number; longitude: number }
+    : { longitude: number; latitude: number };
+
+// 5. Define the database structure, with the correct column order based on the table name
+type Database = {
+  [K in TableName]: K extends "robin"
+    ? CoordinateRow<LongLatSpec>[]
+    : CoordinateRow<LatLongSpec>[];
+};
+
+// Example usage
+const myDatabase: Database = {
+  robin: [
+    { longitude: 0.232132, latitude: 0.323214 }, // longitude comes first for robin
+    { longitude: 0.632132, latitude: 0.523214 },
+  ],
+  andreas: [
+    { latitude: 323214, longitude: 232132 }, // latitude comes first for andreas
+  ],
+};
+
+// Accessing data
+const robinData = myDatabase.robin; // Array of CoordinateRow for the "robin" table
+const andreasData = myDatabase.andreas; // Array of CoordinateRow for the "andreas" table
+
+console.log(robinData);
+console.log(andreasData);
 
 // How to define the property of an object ?
 
