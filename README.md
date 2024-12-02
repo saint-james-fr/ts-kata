@@ -12,7 +12,7 @@ L'idée est de progresser ensemble, toutes les 2 ou 3 semaines sur des kata type
 
 ### 🧠 Concepts
 
-Concepts à réviser : 
+Concepts à réviser :
 
 - [keyof operator](https://www.typescriptlang.org/docs/handbook/2/keyof-types.html)
 
@@ -30,17 +30,11 @@ Concepts à réviser :
 
 - Readonly: [TypeScript Tutorial Exercises](https://type-challenges.github.io/?question=00007-easy-readonly)
 
-
-
 ## 🎯 Séance 2: 10 décembre 2024
 
 ???
-
-
 
 ## 📚 Ressources
 
 - [TypeScript Tutorial Exercises](https://type-challenges.github.io/)
 - [TypeScript Documentation](https://www.typescriptlang.org/docs/handbook/)
-
-
