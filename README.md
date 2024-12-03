@@ -37,22 +37,22 @@ Concepts à réviser :
 
 ## 🎯 Séance 2: 3 décembre 2024
 
-### Révision 1 : le jeu ça
+### 1️⃣ Révision : le jeu du ça
 
 T est ça.
 
-- keyof: je veux avoir accès à toutes les clés de d'un objet comme une union, c'est cette clé de ça ou cette clé de ça ou cette clé de ça...
+- **keyof**: je veux avoir accès à toutes les clés de d'un objet comme une union, c'est cette clé de ça ou cette clé de ça ou cette clé de ça...
   idée: on déplie -> on collectionne
-- mapped type: je veux pouvoir dire que pour chacuns des élements de ça. Pour cet élément de ça, puis pour cet élément de ça....
+- **mapped type**: je veux pouvoir dire que pour chacuns des élements de ça. Pour cet élément de ça, puis pour cet élément de ça....
   idée: itération -> on parcourt
-- conditional type: est-ce que ça est inclus dans ça ? Oui, alors quelquechose est forcément vrai et voici cette chose, et si non voici ce qui va se passer ou pas
+- **conditional type**: est-ce que ça est inclus dans ça ? Oui, alors quelquechose est forcément vrai et voici cette chose, et si non voici ce qui va se passer ou pas
   idée: question -> on fait bifurquer
 
   More examples here
 
-#### Révision 2 Tuple TupleToObject
+### 2️⃣ Révision: Tuple -> TupleToObject
 
-[tuple-to-object exercice](https://type-challenges.github.io/?question=00011-easy-tuple-to-object)
+Copy to [playground](https://www.typescriptlang.org/play/)
 
 ```typescript
 // What is a tuple ?
@@ -74,16 +74,7 @@ type StringTuple = readonly string[];
 // a tuple of composite types
 type CompositeTuple = readonly [boolean, string];
 
-// Keys as a tuple: Latitude and longitude
-type TableName = "robin" | "andreas";
-type CoordinatesTuples = readonly number[];
-type TableRow = CoordinatesTuples[];
-type Database = Record<TableName, { [key in ColumnName]: TableRow[] }[]>;
-
-myDatabase = {
-  robin: [0.323214, 0.232132],
-  andreas: [232132, 323214],
-};
+// Small exercise : latitude or longitude ?
 
 // 1. Define the coordinate column order types (tuples)
 type LatLongSpec = readonly ["latitude", "longitude"];
@@ -95,15 +86,16 @@ type ValidColumns = "latitude" | "longitude";
 // 3. Define table names
 type TableName = "robin" | "andreas";
 
-// 4. Define the structure of a coordinate row based on the column specification
-// For "robin", we use LongLatSpec (longitude first), and for "andreas", we use LatLongSpec (latitude first)
-type CoordinateRow<Spec extends LatLongSpec | LongLatSpec> = Spec extends LatLongSpec
-  ? { latitude: number; longitude: number }
-  : { longitude: number; latitude: number };
+type CoordinateRow<Spec extends LatLongSpec | LongLatSpec> =
+  Spec extends LatLongSpec
+    ? { latitude: number; longitude: number }
+    : { longitude: number; latitude: number };
 
 // 5. Define the database structure, with the correct column order based on the table name
 type Database = {
-  [K in TableName]: K extends "robin" ? CoordinateRow<LongLatSpec>[] : CoordinateRow<LatLongSpec>[];
+  [K in TableName]: K extends "robin"
+    ? CoordinateRow<LongLatSpec>[]
+    : CoordinateRow<LatLongSpec>[];
 };
 
 // Example usage
@@ -118,12 +110,18 @@ const myDatabase: Database = {
 };
 
 // Accessing data
-const robinData = myDatabase.robin;  // Array of CoordinateRow for the "robin" table
-const andreasData = myDatabase.andreas;  // Array of CoordinateRow for the "andreas" table
+const robinData = myDatabase.robin; // Array of CoordinateRow for the "robin" table
+const andreasData = myDatabase.andreas; // Array of CoordinateRow for the "andreas" table
 
 console.log(robinData);
 console.log(andreasData);
+```
 
+### 3️⃣ TupleToObject
+
+Head over to [typescript playground](https://www.typescriptlang.org/play/#code/PQKgUABBCM0QtBAKgVwA4BsCmEAuB7CAeQCMArLAY10gXnodpIE8IBnASwDt98uIAFAAFOPPgEoIAYiwBDNqyn5yVXPADWWZmzC0p+iAEUUWNrg59dUAOIcAbln6ynAJxezmAGjzuubAGb4LgC2EBy4YVwEEM4QyhTUeMxoOM4AJngAFjiazMB2shgmEMEoZhAkONxZOGgu+HYcaVgZsm4eAHRWEABiQRBYAB6ywZhYAFzdAAYzuDpQlHzluOjYEAC8EADaAOS4phiyO947wfjNGBAAzMcQp+dYlwAat-cXEACaOwC6MWwQiz8NFouGSOBcphQGAim1QYyQ+FICVwAB5QSl8P48KssAA+CDAYADQYpagtCAAbzu+zYhx242pByOJzO7xuDLej2ur1ZXJeHN5zx5D0uXwFIs+OwAvrQZlNuviAGocLAAdzi-FsuAAEigSAzMrhcGg2ONCXNKJkOmQ2B0ggBzYCwMAgYC6UAQAD63p9vp9n3wKBcEAAwg8INqsBCvX7Y56IK7dOicHDsAikaoUUhifsuGl-hDZGk+BhWM5mFtvvjNuX3SAY3HfchTBEQ-JTA3G96E26OKMghFk5SIABRACOKEK3hHJNUEClEH89VCOyEyfglsK2C49tMwBQ5gwbB2ukByxxG22eyZwrZt7599FPz+AKWNDPg5xADkUMFKsHNi2aBvAAJm8K5vAAFl+eRXyBMAP3YZhgjgTYAGVkJIfAMAEaBxAQt8kOCEDLwwv9sIEED8MQlYxjIrDLkAhQUO8ZiQJg-4PwIoFsTGABZDhBkvICThA24ILuSDbmY6AOLgswkzBAF23+QDaBnUlUXHScMCzHF0xUag0TBTFeOwXFvCpa9aSODkaTpFkJXZO5BW5Rz3n5FyJRedyuTFLz3i+edcQs9TZyM7TCj0+FEUM1Fk1M2jsB-P8ows4doAZYCIBAhkwOuBkJMghlIOC0KoA0zNIt01MsAM5FjIxLEkqwejsPSqkthk74GQSrEZO8LrkPY3qTP64ays8MLNJRarorTWKGr6sysAEwYOpgLLRPpO4xPAwqTikjkpMG7rRqaoi4ClEKpu+d0iTXNh4CGTTnrcIIwCHKN6gA5B9MWzMthEnLvksqUqzrTsu16INcGyYM0P2E0ocbHswFAWh8TQzI2hwZhA2DNhsIPCw-ANI0TTNYALStG07RcR1YGAZw2FVKNMYgZU1XYYnzCWcnjVNc02Eta1bQdJ1oGAImij5vwOb4oIcBDHGMG3XdTQgQ1Bapmmxfp+0XTdIA) and copy the code below
+
+```typescript
 // How to define the property of an object ?
 
 // A string -> {"c'est vrai ?": true}
@@ -170,19 +168,13 @@ In most cases, when you're defining an object, you'll use a string as the key be
 String is the default for most object keys: When you define an object with keys like obj = { name: "Alice" }, the key is implicitly a string.
 Objects don't naturally accept numeric keys in a way that's significantly different from strings, except for things like arrays, which have numeric indices. Symbol keys are rarely used in everyday code: While symbols are powerful for creating unique keys (useful for things like "private" properties or metadata), they're not commonly used for typical object keys.
 
-type AnyObject = {
-[key: string]: unknwown
-}
-
-Let's do it!
-
 */
+
+type AnyObject = {
+  [key: string]: unknwown;
+};
+
+// You're ready ! Let's do it!
 
 type TupleToObject<T extends readonly PropertyKey[]> = { [P in T[number]]: P };
 ```
-
-###
-
-### infer
-
-Exerice Awaited
