@@ -62,41 +62,33 @@ type Tuple<T> = T[];
 
 // a readonlly tuple
 
-type ReadonlyTuple<T> = readonly T[];
+type ReadonlyTuple<T> =
 
 // An example ?
 // An array of const values, like.. an enum?
 // A row of a database and the the column's name
 
 // A tuple of strings
-type StringTuple = readonly string[];
+type StringTuple = r
 
-// a tuple of composite types
-type CompositeTuple = readonly [boolean, string];
+// a tuple of composite types (boolean and string)
+type CompositeTuple = 
 
 // Small exercise : latitude or longitude ?
 
 // 1. Define the coordinate column order types (tuples)
-type LatLongSpec = readonly ["latitude", "longitude"];
-type LongLatSpec = readonly ["longitude", "latitude"];
+type LatLongSpec = 
+type LongLatSpec = 
 
-// 2. Define valid column names (latitude and longitude)
-type ValidColumns = "latitude" | "longitude";
 
-// 3. Define table names
+// 2. Define table names
 type TableName = "robin" | "andreas";
 
-type CoordinateRow<Spec extends LatLongSpec | LongLatSpec> =
-  Spec extends LatLongSpec
-    ? { latitude: number; longitude: number }
-    : { longitude: number; latitude: number };
+// Define the order
+type CoordinateRow
 
 // 5. Define the database structure, with the correct column order based on the table name
-type Database = {
-  [K in TableName]: K extends "robin"
-    ? CoordinateRow<LongLatSpec>[]
-    : CoordinateRow<LatLongSpec>[];
-};
+type Database = 
 
 // Example usage
 const myDatabase: Database = {
@@ -156,9 +148,7 @@ Ok how how you represent any object then?
 
 */
 
-type MyObject = {
-  PropertyKey: unknown;
-};
+type MyObject = 
 
 /*
 
@@ -170,11 +160,8 @@ Objects don't naturally accept numeric keys in a way that's significantly differ
 
 */
 
-type AnyObject = {
-  [key: string]: unknwown;
-};
-
+type AnyObject = 
 // You're ready ! Let's do it!
 
-type TupleToObject<T extends readonly PropertyKey[]> = { [P in T[number]]: P };
+type TupleToObject<> = 
 ```
