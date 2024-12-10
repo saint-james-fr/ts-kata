@@ -72,13 +72,13 @@ type ReadonlyTuple<T> =
 type StringTuple = r
 
 // a tuple of composite types (boolean and string)
-type CompositeTuple = 
+type CompositeTuple =
 
 // Small exercise : latitude or longitude ?
 
 // 1. Define the coordinate column order types (tuples)
-type LatLongSpec = 
-type LongLatSpec = 
+type LatLongSpec =
+type LongLatSpec =
 
 
 // 2. Define table names
@@ -88,7 +88,7 @@ type TableName = "robin" | "andreas";
 type CoordinateRow
 
 // 5. Define the database structure, with the correct column order based on the table name
-type Database = 
+type Database =
 
 // Example usage
 const myDatabase: Database = {
@@ -148,7 +148,7 @@ Ok how how you represent any object then?
 
 */
 
-type MyObject = 
+type MyObject =
 
 /*
 
@@ -160,23 +160,21 @@ Objects don't naturally accept numeric keys in a way that's significantly differ
 
 */
 
-type AnyObject = 
+type AnyObject =
 // You're ready ! Let's do it!
 
-type TupleToObject<> = 
+type TupleToObject<> =
 ```
-
 
 ## 🎯 Séance 3: 10 décembre 2024
 
-### 1️⃣ Pick Fist
+### 1️⃣ Pick First
 
 [Exercice](https://type-challenges.github.io/?question=00014-easy-first)
 
 ### 2️⃣ Length
 
 [Exercice](https://type-challenges.github.io/?question=00018-easy-tuple-length)
-
 
 ### 3️⃣ Exclude
 
