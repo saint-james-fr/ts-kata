@@ -168,7 +168,7 @@ type TupleToObject<> =
 
 ## 🎯 Séance 3: 10 décembre 2024
 
-### 1️⃣ Pick Fist
+### 1️⃣ Pick First
 
 [Exercice](https://type-challenges.github.io/?question=00014-easy-first)
 
