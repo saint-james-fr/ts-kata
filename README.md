@@ -165,3 +165,19 @@ type AnyObject =
 
 type TupleToObject<> = 
 ```
+
+
+## 🎯 Séance 3: 10 décembre 2024
+
+### 1️⃣ Pick Fist
+
+[Exercice](https://type-challenges.github.io/?question=00014-easy-first)
+
+### 2️⃣ Length
+
+[Exercice](https://type-challenges.github.io/?question=00018-easy-tuple-length)
+
+
+### 3️⃣ Exclude
+
+[Exercice](https://type-challenges.github.io/?question=00043-easy-exclude)
