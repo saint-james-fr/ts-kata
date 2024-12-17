@@ -187,3 +187,21 @@ type TupleToObject<> =
 ### 5️⃣ Concat
 
 [Exercice](https://type-challenges.github.io/?question=00533-easy-concat)
+
+## Séance 4: 17 décembre 2024
+
+### 1️⃣ Includes
+
+[Exercice](https://type-challenges.github.io/?question=00898-easy-includes)
+
+### 2️⃣ Push
+
+[Exercice](https://type-challenges.github.io/?question=03057-easy-push)
+
+### 3️⃣ Unshift
+
+[Exercice](https://type-challenges.github.io/?question=03162-easy-unshift)
+
+### 4️⃣ Parameters
+
+[Exercice](https://type-challenges.github.io/?question=03312-easy-parameters)
