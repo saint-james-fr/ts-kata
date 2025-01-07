@@ -205,3 +205,7 @@ type TupleToObject<> =
 ### 4️⃣ Parameters
 
 [Exercice](https://type-challenges.github.io/?question=03312-easy-parameters)
+
+## Séance 5: 7 janvier 2025
+
+### 1️⃣ Arithmetic
